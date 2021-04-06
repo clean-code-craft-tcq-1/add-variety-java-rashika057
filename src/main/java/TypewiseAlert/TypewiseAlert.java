@@ -37,7 +37,7 @@ public class TypewiseAlert
     
     public static void sendToController(BreachType breachType) {
       int header = 0xfeed;
-      System.out.printf("%i : %i%n", header, breachType);
+      System.out.printf("%d : %s%n", header, breachType.getDisplayName()+"\n");
     }
     public static void sendToEmail(BreachType breachType) {
       String recepient = "a.b@c.com";
@@ -46,4 +46,7 @@ public class TypewiseAlert
           System.out.println("Hi, the temperature is "+breachType.getDisplayName()+"\n");
       }      
     }
+    public static void sendToConsole(BreachType breachType) {
+            System.out.println("The temperature is "+breachType.getDisplayName()+"\n");
+      }
 }

@@ -2,7 +2,8 @@ package TypewiseAlert;
 
 public enum AlertTarget{
     TO_CONTROLLER("ToController"),
-    TO_EMAIL("ToEmail");
+    TO_EMAIL("ToEmail"),
+	TO_CONSOLE("ToConsole");
 	
 	private String displayName;
 	
