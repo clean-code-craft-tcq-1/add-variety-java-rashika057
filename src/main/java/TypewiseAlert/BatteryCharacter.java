@@ -9,9 +9,7 @@ public class BatteryCharacter {
 	public void setCoolingType(CoolingType coolingType) {
 		this.coolingType = coolingType;
 	}
-	public String getBrand() {
-		return brand;
-	}
+
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
