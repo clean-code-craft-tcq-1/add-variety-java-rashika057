@@ -9,13 +9,10 @@ public class TypewiseAlert
 		this.locator = locator;
 	}
     public static BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
-    	if(Double.isNaN(value)) {
-    		throw new IllegalArgumentException();
-    	}
-      if(value < lowerLimit) {
+    if(value < lowerLimit) {
         return BreachType.TOO_LOW;
       }
-      if(value > upperLimit) {
+    	else if(value > upperLimit) {
         return BreachType.TOO_HIGH;
       }
       return BreachType.NORMAL;
