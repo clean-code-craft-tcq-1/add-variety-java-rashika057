@@ -1,11 +1,7 @@
 package TypewiseAlert;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -14,12 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import AlertTarget.FakeService;
-import AlertTarget.IAlertTargetService;
-import ServiceLocator.Cache;
 import ServiceLocator.FakeServiceLocator;
-import ServiceLocator.IServiceLocator;
-import ServiceLocator.InitialContext;
-import ServiceLocator.MessagingServiceLocator;
 
 @RunWith(Parameterized.class)
 public class TypewiseAlertTest 
