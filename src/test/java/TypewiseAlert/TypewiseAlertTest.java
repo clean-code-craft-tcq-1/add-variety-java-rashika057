@@ -64,7 +64,7 @@ public class TypewiseAlertTest
     @Test(expected = IllegalArgumentException.class)
     public void classifyTemperatureBreachIfTempisNaN()
     {
-      assertEquals(expectedResult,TypewiseAlert.classifyTemperatureBreach(type,Double.NaN));
+      TypewiseAlert.classifyTemperatureBreach(type,Double.NaN);
     }
     
     @Test

@@ -15,7 +15,7 @@ public class TypewiseAlert
       if(value < lowerLimit) {
         return BreachType.TOO_LOW;
       }
-      else if(value > upperLimit) {
+      if(value > upperLimit) {
         return BreachType.TOO_HIGH;
       }
       return BreachType.NORMAL;
