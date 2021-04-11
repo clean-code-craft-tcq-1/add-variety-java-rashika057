@@ -31,11 +31,6 @@ public class TypewiseAlert
      BreachType breachType = classifyTemperatureBreach(
       batteryChar.getCoolingType(), temperatureInC
    );
-  sendAlert(alertTarget, breachType);
+     ((IAlertTargetService) locator.getService(alertTarget)).send(breachType);
     }
-    
-    public  void sendAlert(String alertTarget,BreachType breachType) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-    	((IAlertTargetService) locator.getService(alertTarget)).send(breachType);
-    }
-   
-}
+   }

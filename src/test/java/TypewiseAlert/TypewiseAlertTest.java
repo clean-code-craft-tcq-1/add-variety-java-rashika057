@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -19,13 +20,24 @@ public class TypewiseAlertTest
 	double tempInC;
 	BreachType expectedResult;
 	String alertTarget;
-	
+	BatteryCharacter batteryCharacter;
+	FakeService fakeService;
+	TypewiseAlert typewiseAlert;
 	public TypewiseAlertTest(CoolingType type, double tempInC,BreachType expectedResult,String alertTarget) {
 	      this.type = type;
 	      this.tempInC = tempInC;
 	      this.expectedResult = expectedResult;
 	      this.alertTarget = alertTarget;
 	   }
+	
+	@Before
+    public void setup() { 		
+		batteryCharacter = new BatteryCharacter();
+    	batteryCharacter.setBrand("Aptiv");
+    	batteryCharacter.setCoolingType(type);
+		fakeService = new FakeService();
+		typewiseAlert = new TypewiseAlert(new FakeServiceLocator(fakeService));
+	}
 
 	   @Parameterized.Parameters
 	   public static Collection inputData() {
@@ -57,12 +69,8 @@ public class TypewiseAlertTest
     
     @Test
     public  void checkAndAlertAsPerAlertTarget() {
-    	BatteryCharacter batteryCharacter = new BatteryCharacter();
-    	batteryCharacter.setBrand("Aptiv");
-    	batteryCharacter.setCoolingType(type);
+    	
 		try {
-			FakeService fakeService = new FakeService();
-			TypewiseAlert typewiseAlert = new TypewiseAlert(new FakeServiceLocator(fakeService));
 			typewiseAlert.checkAndAlert("Fake",batteryCharacter , tempInC);
 			assertEquals("The temperature is "+expectedResult.getDisplayName(),fakeService.getMsg());
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
@@ -72,12 +80,7 @@ public class TypewiseAlertTest
     
     @Test
     public void checkAndAlertIfEmpyAlertTarget() {
-    	BatteryCharacter batteryCharacter = new BatteryCharacter();
-    	batteryCharacter.setBrand("Aptiv");
-    	batteryCharacter.setCoolingType(type);
-		try {
-			FakeService fakeService = new FakeService();
-			TypewiseAlert typewiseAlert = new TypewiseAlert(new FakeServiceLocator(fakeService));
+    	try {
 			typewiseAlert.checkAndAlert("",batteryCharacter , tempInC);
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 			assertEquals(ClassNotFoundException.class,e.getClass());
