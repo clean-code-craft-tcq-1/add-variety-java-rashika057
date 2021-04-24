@@ -1,8 +1,8 @@
-package AlertTarget;
+package alertTarget;
 
-import TypewiseAlert.BreachType;
+import typeWiseBreachAlert.BreachType;
 
-public class ConsoleService implements IAlertTargetService {
+public class ConsoleNotifier implements IAlertTargetObserver {
 	   
     public void send(BreachType breachType) {
             System.out.println("The temperature is "+breachType.getDisplayName()+"\n");

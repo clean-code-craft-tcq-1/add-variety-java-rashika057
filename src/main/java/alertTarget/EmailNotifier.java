@@ -1,8 +1,8 @@
-package AlertTarget;
+package alertTarget;
 
-import TypewiseAlert.BreachType;
+import typeWiseBreachAlert.BreachType;
 
-public class EmailService implements IAlertTargetService {
+public class EmailNotifier implements IAlertTargetObserver {
 	
 	 public void send(BreachType breachType) {
 	      String recepient = "a.b@c.com";

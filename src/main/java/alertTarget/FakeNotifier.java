@@ -1,8 +1,8 @@
-package AlertTarget;
+package alertTarget;
 
-import TypewiseAlert.BreachType;
+import typeWiseBreachAlert.BreachType;
 
-public class FakeService implements IAlertTargetService {
+public class FakeNotifier implements IAlertTargetObserver {
 	String  msg;
 	public void send(BreachType breachType) {
         msg = "The temperature is "+breachType.getDisplayName();

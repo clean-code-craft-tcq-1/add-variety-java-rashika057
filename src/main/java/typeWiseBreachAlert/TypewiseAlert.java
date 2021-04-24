@@ -1,14 +1,10 @@
-package TypewiseAlert;
+package typeWiseBreachAlert;
 
-import AlertTarget.IAlertTargetService;
-import ServiceLocator.IServiceLocator;
+import alertTarget.IAlertTargetObserver;
+
 public class TypewiseAlert 
-{  
-	 IServiceLocator locator;
-	TypewiseAlert(IServiceLocator locator){
-		this.locator = locator;
-	}
-    public static BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
+{
+	public static BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
     if(value < lowerLimit) {
         return BreachType.TOO_LOW;
       }
@@ -24,10 +20,14 @@ public class TypewiseAlert
     }
     
     public  void checkAndAlert(
-     String alertTarget, BatteryCharacter batteryChar, double temperatureInC) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    		IAlertTargetObserver alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
      BreachType breachType = classifyTemperatureBreach(
       batteryChar.getCoolingType(), temperatureInC
    );
-     ((IAlertTargetService) locator.getService(alertTarget)).send(breachType);
+    alert(alertTarget,breachType);
     }
+    
+    public void alert(IAlertTargetObserver alertTarget, BreachType breachType) {
+    	alertTarget.send(breachType);
    }
+}

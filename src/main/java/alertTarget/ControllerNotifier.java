@@ -1,8 +1,8 @@
-package AlertTarget;
+package alertTarget;
 
-import TypewiseAlert.BreachType;
+import typeWiseBreachAlert.BreachType;
 
-public class ControllerService implements IAlertTargetService {
+public class ControllerNotifier implements IAlertTargetObserver {
     
     public void send(BreachType breachType) {
       int header = 0xfeed;

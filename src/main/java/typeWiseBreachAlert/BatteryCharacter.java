@@ -1,4 +1,4 @@
-package TypewiseAlert;
+package typeWiseBreachAlert;
 
 public class BatteryCharacter {
     private CoolingType coolingType;

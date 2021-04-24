@@ -1,4 +1,4 @@
-package TypewiseAlert;
+package typeWiseBreachAlert;
 
 public enum BreachType {
     NORMAL("normal"),

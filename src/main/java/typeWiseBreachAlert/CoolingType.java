@@ -1,4 +1,4 @@
-package TypewiseAlert;
+package typeWiseBreachAlert;
 
 public enum CoolingType {
     PASSIVE_COOLING(0,35),
