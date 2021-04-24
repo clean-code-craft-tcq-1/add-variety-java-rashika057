@@ -20,11 +20,14 @@ public class TypewiseAlert
     }
     
     public  void checkAndAlert(
-    		IAlertTargetObserver alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
+    IAlertTargetObserver alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
      BreachType breachType = classifyTemperatureBreach(
       batteryChar.getCoolingType(), temperatureInC
    );
+
+ 	if(!breachType.equals(BreachType.NORMAL)) {
     alert(alertTarget,breachType);
+ 	}
     }
     
     public void alert(IAlertTargetObserver alertTarget, BreachType breachType) {

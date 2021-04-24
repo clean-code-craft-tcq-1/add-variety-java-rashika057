@@ -33,6 +33,7 @@ public class TypewiseAlertTest
 	String alertTarget;
 	BatteryCharacter batteryCharacter;
 	TypewiseAlert typewiseAlert;
+	String expectedMessage;
 	FakeNotifier observer;
 	
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -40,18 +41,19 @@ public class TypewiseAlertTest
 	@Parameterized.Parameters
 	public static Collection inputData() {
 	      return Arrays.asList(new Object[][]{
-	         { CoolingType.MED_ACTIVE_COOLING, 50,BreachType.TOO_HIGH,"Email"  },
-	         { CoolingType.HI_ACTIVE_COOLING, 30, BreachType.NORMAL,"Controller" },
-	         { CoolingType.PASSIVE_COOLING, -10,BreachType.TOO_LOW,"Console"  },
-	         { CoolingType.PASSIVE_COOLING, -10,BreachType.TOO_LOW,"Controller"  }
+	         { CoolingType.MED_ACTIVE_COOLING, 50,BreachType.TOO_HIGH,"Email","The temperature is "+BreachType.TOO_HIGH.getDisplayName()  },
+	         { CoolingType.HI_ACTIVE_COOLING, 30, BreachType.NORMAL,"Controller","" },
+	         { CoolingType.PASSIVE_COOLING, -10,BreachType.TOO_LOW,"Console","The temperature is "+BreachType.TOO_LOW.getDisplayName()  },
+	         { CoolingType.PASSIVE_COOLING, -10,BreachType.TOO_LOW,"Controller","The temperature is "+BreachType.TOO_LOW.getDisplayName()  }
 	      });
 	}
 	
-	public TypewiseAlertTest(CoolingType type, double tempInC,BreachType expectedResult,String alertTarget) {
+	public TypewiseAlertTest(CoolingType type, double tempInC,BreachType expectedResult,String alertTarget,String expectedMessage) {
 	      this.type = type;
 	      this.tempInC = tempInC;
 	      this.expectedResult = expectedResult;
 	      this.alertTarget = alertTarget;
+	      this.expectedMessage = expectedMessage;
 	   }
 	
 	@Before
@@ -84,7 +86,7 @@ public class TypewiseAlertTest
 			//when
 			typewiseAlert.checkAndAlert(observer,batteryCharacter , tempInC);
 			//verify
-			assertEquals("The temperature is "+expectedResult.getDisplayName(),observer.getMsg());
+			assertEquals(expectedMessage,observer.getMsg());
 	    }
     
     @Test
@@ -99,13 +101,13 @@ public class TypewiseAlertTest
 			typewiseAlert.checkAndAlert(_compositeObserver,batteryCharacter , tempInC);
 			//verify
 			assertTrue(outputStreamCaptor.toString()
-				      .trim().contains("The temperature is "+expectedResult.getDisplayName()));
+				      .trim().contains(expectedMessage));
 	    }
     
     @Test(expected = NullPointerException.class)
-    public void givenAlertTarget_whenCheckandAlert_thenThrowsExceptionIfAlertEmpty(){
+    public void givenAlertTarget_whenAlert_thenThrowsExceptionIfAlertEmpty(){
     	//when	
-			typewiseAlert.checkAndAlert(observer,batteryCharacter , tempInC);
+			typewiseAlert.alert(observer,BreachType.TOO_HIGH);
 		}
     
 }
